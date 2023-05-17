@@ -165,7 +165,7 @@ const Singelblog = () => {
         </section>
 
         <section className="serach-data-list">
-          <div className="table table-striped table-sm">
+          <div className="table table-striped table-sm table-responsive">
             <thead>
               <tr>
                 <th scope="col">✔</th>
@@ -234,9 +234,9 @@ const Singelblog = () => {
           </div>
         </section>
 
-        <section className="search-tool-table">
+        <section className="search-tool-table ">
           <div className="search-table">
-            <table class="table table-striped table-sm">
+            <table class="table table-striped table-sm table-responsive">
               <thead>
                 <tr>
                   <th scope="col">✔</th>

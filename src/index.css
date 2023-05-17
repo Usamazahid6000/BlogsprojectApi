@@ -18,9 +18,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
   font-weight: 800;
   font-size: 64px;
+}
+
+.blog-image > h1 {
+  color: #fff;
 }
 
 .padding-zero-lr {
@@ -89,7 +92,7 @@
   padding-left: 22px;
 }
 
-.card-content p {
+.card-content > p {
   color: #232536;
   opacity: 0.6;
   font-weight: 600;
@@ -219,7 +222,7 @@
   background: gainsboro;
 }
 
-.serach-data-list{
+.serach-data-list {
   margin-top: 40px;
 }
 

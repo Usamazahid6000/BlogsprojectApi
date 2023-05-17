@@ -129,15 +129,16 @@ const Blogspost = ({ payloadData }) => {
       <div className="blog-background">
         <div className="container">
           <div className="row">
-            {blogsdata?.map((data, id) => {
-              //console.log(data);
+            {blogsdata?.slice(0, 9).map((data, id) => {
+              //  console.log(data);
               return (
-                <div className="col-md-4" key={id}>
+                <div className="col-md-4">
                   <Link to={`/singelblog/${data.id}`}>
                     <img
                       src={data.Image}
                       className="blog-picture"
                       loading="lazy"
+                      key={id}
                       onClick={() =>
                         dispatch(incrementViews({ bogId: data.id }))
                       }
