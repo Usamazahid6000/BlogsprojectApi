@@ -4,37 +4,40 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { incrementViews } from "../Redux/Slices";
 import { useSelector, useDispatch } from "react-redux";
+import Loader from "./Loader";
 
 const Blogspost = ({ payloadData }) => {
   const [blogsdata, setBlogsdata] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
 
   const totalViews = useSelector(
     (state) => state.blogViews.value[payloadData] || 0
   );
-  // console.log(totalViews);
+  // totalViews can be used that how many time user click each Blog-post.
 
   const loadBlogs = async () => {
+    setIsLoading(true);
     const Api_URL = "https://61791a83aa7f3400174047a6.mockapi.io/v1/GetBLogs/";
     try {
       let response = await axios.get(Api_URL);
-      // console.log(response);
       setBlogsdata(response.data);
     } catch (err) {
       setError(err.message);
     }
+    setIsLoading(false); // Hide loading screen
     if (error) {
       return <p>Error:{error}</p>;
     }
   };
 
-  //console.log(blogsdata);
-
   useEffect(() => {
-    loadBlogs();
-  }, []);
+    if (isLoading) {
+      loadBlogs();
+    }
+  }, [isLoading]);
 
   return (
     <>
@@ -129,63 +132,66 @@ const Blogspost = ({ payloadData }) => {
       <div className="blog-background">
         <div className="container">
           <div className="row">
-            {blogsdata?.slice(0, 9).map((data, id) => {
-              //  console.log(data);
-              return (
-                <div className="col-md-4">
-                  <Link to={`/singelblog/${data.id}`}>
-                    <img
-                      src={data.Image}
-                      className="blog-picture"
-                      loading="lazy"
-                      key={id}
-                      onClick={() =>
-                        dispatch(incrementViews({ bogId: data.id }))
-                      }
-                    />
-                  </Link>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              blogsdata?.slice(0, 9).map((data, id) => {
+                return (
+                  <div className="col-md-4">
+                    <Link to={`/singelblog/${data.id}`}>
+                      <img
+                        src={data.Image}
+                        className="blog-picture"
+                        loading="lazy"
+                        key={id}
+                        onClick={() =>
+                          dispatch(incrementViews({ bogId: data.id }))
+                        }
+                      />
+                    </Link>
 
-                  <div className="blog-intro">
-                    <div className="blog-date">
-                      <p>Posted on October 6th 2021</p>
+                    <div className="blog-intro">
+                      <div className="blog-date">
+                        <p>Posted on October 6th 2021</p>
+                      </div>
+                      <div className="blog-icon">
+                        <span>
+                          <svg
+                            width="22"
+                            height="16"
+                            viewBox="0 0 22 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M19.8698 6.962C20.3438 7.582 20.3438 8.419 19.8698 9.038C18.3768 10.987 14.7948 15 10.6128 15C6.4308 15 2.8488 10.987 1.3558 9.038C1.12519 8.74113 1 8.37592 1 8C1 7.62408 1.12519 7.25887 1.3558 6.962C2.8488 5.013 6.4308 1 10.6128 1C14.7948 1 18.3768 5.013 19.8698 6.962V6.962Z"
+                              stroke="#B8B8B8"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                            <path
+                              d="M10.6133 11C12.2701 11 13.6133 9.65685 13.6133 8C13.6133 6.34315 12.2701 5 10.6133 5C8.95643 5 7.61328 6.34315 7.61328 8C7.61328 9.65685 8.95643 11 10.6133 11Z"
+                              stroke="#B8B8B8"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </span>
+                        <p>563 views</p>
+                      </div>
                     </div>
-                    <div className="blog-icon">
-                      <span>
-                        <svg
-                          width="22"
-                          height="16"
-                          viewBox="0 0 22 16"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M19.8698 6.962C20.3438 7.582 20.3438 8.419 19.8698 9.038C18.3768 10.987 14.7948 15 10.6128 15C6.4308 15 2.8488 10.987 1.3558 9.038C1.12519 8.74113 1 8.37592 1 8C1 7.62408 1.12519 7.25887 1.3558 6.962C2.8488 5.013 6.4308 1 10.6128 1C14.7948 1 18.3768 5.013 19.8698 6.962V6.962Z"
-                            stroke="#B8B8B8"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                          <path
-                            d="M10.6133 11C12.2701 11 13.6133 9.65685 13.6133 8C13.6133 6.34315 12.2701 5 10.6133 5C8.95643 5 7.61328 6.34315 7.61328 8C7.61328 9.65685 8.95643 11 10.6133 11Z"
-                            stroke="#B8B8B8"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </span>
-                      <p>563 views</p>
+                    <div className="blog-content-1">
+                      <p>{data.Title} </p>
+                    </div>
+                    <div className="blog-content-2">
+                      <p>{data.Subtitle}</p>
                     </div>
                   </div>
-                  <div className="blog-content-1">
-                    <p>{data.Title} </p>
-                  </div>
-                  <div className="blog-content-2">
-                    <p>{data.Subtitle}</p>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </div>
       </div>
