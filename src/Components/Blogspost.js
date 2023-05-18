@@ -69,8 +69,8 @@ const Blogspost = ({ payloadData }) => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div class="card">
-                <div class="card-body">
+              <div className="card">
+                <div className="card-body">
                   <div className="left-card">
                     <div className="body-head">
                       <img src={car} />
@@ -137,13 +137,12 @@ const Blogspost = ({ payloadData }) => {
             ) : (
               blogsdata?.slice(0, 9).map((data, id) => {
                 return (
-                  <div className="col-md-4">
+                  <div className="col-md-4" key={id}>
                     <Link to={`/singelblog/${data.id}`}>
                       <img
                         src={data.Image}
                         className="blog-picture"
                         loading="lazy"
-                        key={id}
                         onClick={() =>
                           dispatch(incrementViews({ bogId: data.id }))
                         }
@@ -166,16 +165,16 @@ const Blogspost = ({ payloadData }) => {
                             <path
                               d="M19.8698 6.962C20.3438 7.582 20.3438 8.419 19.8698 9.038C18.3768 10.987 14.7948 15 10.6128 15C6.4308 15 2.8488 10.987 1.3558 9.038C1.12519 8.74113 1 8.37592 1 8C1 7.62408 1.12519 7.25887 1.3558 6.962C2.8488 5.013 6.4308 1 10.6128 1C14.7948 1 18.3768 5.013 19.8698 6.962V6.962Z"
                               stroke="#B8B8B8"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
                             />
                             <path
                               d="M10.6133 11C12.2701 11 13.6133 9.65685 13.6133 8C13.6133 6.34315 12.2701 5 10.6133 5C8.95643 5 7.61328 6.34315 7.61328 8C7.61328 9.65685 8.95643 11 10.6133 11Z"
                               stroke="#B8B8B8"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
                             />
                           </svg>
                         </span>
