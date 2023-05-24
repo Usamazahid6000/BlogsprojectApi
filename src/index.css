@@ -10,6 +10,22 @@
   display: flex;
 }
 
+.darkMode-btn {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.dark {
+  background: #333 !important;
+  color: #fff !important;
+}
+
+.light {
+  background: #fff;
+  color: #333;
+}
+
 .blog-image {
   background-image: url(./images/picture.png);
   width: 100%;

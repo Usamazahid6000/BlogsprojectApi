@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { combineReducers } from "@reduxjs/toolkit";
 
 const initialState = {
   value: {},
 };
 
-export const counterSlice = createSlice({
+const counterSlice = createSlice({
   name: "blogsViews",
   initialState,
   reducers: {
@@ -17,5 +18,26 @@ export const counterSlice = createSlice({
   },
 });
 
+const themeSlice = createSlice({
+  name: "theme",
+  initialState: {
+    mode: "light", // Initial theme mode
+  },
+  reducers: {
+    toggleTheme: (state) => {
+      state.mode = state.mode === "light" ? "dark" : "light";
+    },
+  },
+});
+
 export const { incrementViews } = counterSlice.actions;
-export default counterSlice.reducer;
+export const { toggleTheme } = themeSlice.actions;
+
+const rootReducer = combineReducers({
+  counter: counterSlice.reducer,
+  mode: themeSlice.reducer,
+});
+
+export default rootReducer;
+
+export const selectTheme = (state) => state.mode;

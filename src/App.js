@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Blogspost from "./Components/Blogspost";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Singelblog from "./Components/Singelblog";
