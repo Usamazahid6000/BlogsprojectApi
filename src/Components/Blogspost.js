@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { incrementViews } from "../Redux/Slices";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "./Loader";
-import Thememode from "./Thememode";
+// import Thememode from "./Thememode";
 import { selectTheme } from "../Redux/Slices";
 
 const Blogspost = ({ payloadData }) => {
@@ -73,11 +73,6 @@ const Blogspost = ({ payloadData }) => {
         </div>
       </div>
       <div className={`all-main ${Modeclass}`}>
-        {/* dark mode toggle button  */}
-        <div className="darkMode-btn">
-          <Thememode />
-        </div>
-
         {/* card section start */}
         <section className={`card-section ${Modeclass}`}>
           <div className="container">
@@ -156,7 +151,8 @@ const Blogspost = ({ payloadData }) => {
                     <div className="col-md-4" key={id}>
                       <Link to={`/singelblog/${data.id}`}>
                         <img
-                          src={data.Image} alt=""
+                          src={data.Image}
+                          alt=""
                           className="blog-picture"
                           loading="lazy"
                           onClick={() =>
