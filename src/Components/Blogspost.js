@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { incrementViews } from "../Redux/Slices";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "./Loader";
-// import Thememode from "./Thememode";
 import { selectTheme } from "../Redux/Slices";
 
 const Blogspost = ({ payloadData }) => {
